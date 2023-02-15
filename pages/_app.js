@@ -3,7 +3,7 @@ import { IcyProvider } from "@quicknode/icy-nft-hooks";
 
 export default function App({ Component, pageProps }) {
   return (
-    <IcyProvider apiKey={QUICKNODE_NFT_API_KEY}>
+    <IcyProvider apiKey={process.env.QUICKNODE_NFT_API_KEY}>
       <Component {...pageProps} />
     </IcyProvider>
   );
