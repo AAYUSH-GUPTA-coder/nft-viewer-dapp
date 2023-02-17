@@ -12,23 +12,33 @@ function WalletNFTs() {
     after: cursor,
   });
 
+  function check(e) {
+    console.log(e);
+    if (e.target.value.slice(0, 2) === "0x") {
+      console.log(true);
+      setAddress(e.target.value);
+    } else {
+      setEnsName(e.target.value);
+    }
+  }
+
   return (
     <div className="p-10 flex flex-col items-center">
-      <h1 className='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-6xl mb-4"'>
+      <h1 className='text-3xl tracking-tight font-extrabold first-line:white sm:text-4xl md:text-6xl mb-4"'>
         NFT Viewer
       </h1>
       <div className="flex-left flex-col mt-4">
         <label
-          className="text-zinc-700 text-2xl font-extrabold"
+          className="text-white text-2xl font-extrabold pb-2"
           htmlFor="wallet-address"
         >
           &nbsp; Wallet address: &nbsp;
         </label>
         <div className="search">
-          <input
+          <input className="px-3 py-2 rounded-md"
             type="text"
-            value={ensName}
-            onChange={(e) => setEnsName(e.target.value)}
+            value={ensName || address}
+            onChange={(e) => check(e)}
             style={{
               outlineColor:
                 !isSearchValid && ensName.length > 0 ? "red" : undefined,
@@ -47,14 +57,16 @@ function WalletNFTs() {
               className="flex flex-col rounded border p-4"
               key={`${nft.tokenId}${nft.contract.address}`}
             >
-              {imageUrl && (
-                <div className="w-[200px] h-[200px] rounded shadow">
-                  <img src={imageUrl} alt="nft awesome" />
-                </div>
-              )}
+              <div className="w-full h-full rounded shadow flex justify-center items-center">
+                <img
+                  className="w-full h-full"
+                  src={imageUrl ?? "/web3.png"}
+                  alt="nft awesome"
+                />
+              </div>
               <div>
-                <h1>{contract.name}</h1>
-                <h2>
+                <h1 className="font-bold">{contract.name}</h1>
+                <h2 className="truncate">
                   {contract.symbol}#{nft.tokenId}
                 </h2>
               </div>
@@ -62,7 +74,6 @@ function WalletNFTs() {
           );
         })}
       </div>
-
 
       {pageInfo?.hasNextPage && (
         <div
