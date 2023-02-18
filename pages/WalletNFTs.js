@@ -2,8 +2,8 @@ import { useWalletNFTs } from "@quicknode/icy-nft-hooks";
 import { useState } from "react";
 
 function WalletNFTs() {
-  const [ensName, setEnsName] = useState("vitalik.eth");
-  const [address, setAddress] = useState("");
+  const [ensName, setEnsName] = useState("vitalik.eth"); //vitalik.eth
+  const [address, setAddress] = useState(""); // "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
   const [cursor, setCursor] = useState("");
   const { nfts, isSearchValid, pageInfo } = useWalletNFTs({
     address,
@@ -24,9 +24,18 @@ function WalletNFTs() {
 
   return (
     <div className="p-10 flex flex-col items-center">
-      <h1 className='text-3xl tracking-tight font-extrabold first-line:white sm:text-4xl md:text-6xl mb-4"'>
-        NFT Viewer
-      </h1>
+      <div className="w-full h-full flex flex-col justify-start gap-5 items-center">
+        <h1 className="text-7xl font-bold">NFT Viewer</h1>
+        <h3 className="text-xl font-semibold">
+          Powered by{" "}
+          <a
+            className="underline"
+            href="https://developers.icy.tools/?utm_source=quicknode&utm_campaign=quicknode-header"
+          >
+            QuickNode's GraphQL NFT API
+          </a>
+        </h3>
+      </div>
       <div className="flex-left flex-col mt-4">
         <label
           className="text-white text-2xl font-extrabold pb-2"
@@ -35,7 +44,8 @@ function WalletNFTs() {
           &nbsp; Wallet address: &nbsp;
         </label>
         <div className="search">
-          <input className="px-3 py-2 rounded-md"
+          <input
+            className="px-3 py-2 rounded-md"
             type="text"
             value={ensName || address}
             onChange={(e) => check(e)}
@@ -48,8 +58,10 @@ function WalletNFTs() {
       </div>
 
       <div className="grid grid-cols-4 mt-8 gap-4">
+        {console.log(nfts)}
         {nfts.map((nft) => {
           const contract = nft.contract;
+          console.log(contract);
           const imageUrl = nft.images.find((i) => !!i.url)?.url;
 
           return (
@@ -61,7 +73,7 @@ function WalletNFTs() {
                 <img
                   className="w-full h-full"
                   src={imageUrl ?? "/web3.png"}
-                  alt="nft awesome"
+                  alt="awesome nft"
                 />
               </div>
               <div>
