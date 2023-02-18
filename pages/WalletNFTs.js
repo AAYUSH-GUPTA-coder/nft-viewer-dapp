@@ -25,7 +25,7 @@ function WalletNFTs() {
   return (
     <div className="p-10 flex flex-col items-center">
       <div className="w-full h-full flex flex-col justify-start gap-5 items-center">
-        <h1 className="text-7xl font-bold">NFT Viewer</h1>
+        <h1 className="text-7xl font-bold">NFT Gallery</h1>
         <h3 className="text-xl font-semibold">
           Powered by{" "}
           <a
@@ -41,7 +41,7 @@ function WalletNFTs() {
           className="text-white text-2xl font-extrabold pb-2"
           htmlFor="wallet-address"
         >
-          &nbsp; Wallet address: &nbsp;
+          &nbsp; ENS / Wallet address: &nbsp;
         </label>
         <div className="search">
           <input
