@@ -18,12 +18,12 @@ function WalletNFTs() {
     console.log(e);
     if (e.target.value.slice(0, 2) === "0x") {
       console.log(true);
-      console.log(e.target.value);
+      console.log(e.target.value.toLowerCase());
       setAddress(e.target.value.toLowerCase());
-      setEnsName(null);
+      setEnsName("");
     } else {
       setEnsName(e.target.value);
-      setAddress(null);
+      setAddress("");
     }
   }
 
