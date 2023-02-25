@@ -2,17 +2,18 @@ import { useWalletNFTs } from "@quicknode/icy-nft-hooks";
 import { useState } from "react";
 
 function WalletNFTs() {
-  const [ensName, setEnsName] = useState(""); //vitalik.eth
-  const [address, setAddress] = useState(
-    "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045".toLowerCase()
-  ); // "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
+  const [ensName, setEnsName] = useState("vitalik.eth"); //vitalik.eth
+  const [address, setAddress] = useState(""); // "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045".toLowerCase()
   const [cursor, setCursor] = useState("");
-  const { nfts, isSearchValid, pageInfo } = useWalletNFTs({
-    address,
-    ensName,
-    first: 12,
-    after: cursor,
-  });
+  const { nfts, isSearchValid, pageInfo } = useWalletNFTs(
+    address
+      ? {
+          address,
+          first: 12,
+          after: cursor,
+        }
+      : { ensName, first: 12, after: cursor }
+  );
 
   function check(e) {
     console.log(e);
